@@ -1,6 +1,6 @@
 <?php
 
-namespace App\tests\Feature;
+namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\Movie;
