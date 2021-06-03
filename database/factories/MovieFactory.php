@@ -22,7 +22,20 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            //
         ];
+    }
+
+    /**
+     * Create movie with the same imdb_id
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function sameImdbID()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'imdb_id' => '1234abc',
+            ];
+        });
     }
 }
