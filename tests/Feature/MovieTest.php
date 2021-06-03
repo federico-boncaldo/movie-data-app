@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MovieTest extends TestCase
 {
+    use RefreshDatabase;
 
     /** @test */
     public function cannot_be_duplicated()
