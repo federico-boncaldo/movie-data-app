@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedMediumInteger('year');
-            $table->string('imdb_id');
+            $table->string('imdb_id')->unique();
             $table->string('type');
             $table->timestamps();
         });
