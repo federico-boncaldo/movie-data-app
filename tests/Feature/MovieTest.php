@@ -15,12 +15,8 @@ class MovieTest extends TestCase
     /** @test */
     public function cannot_be_duplicated()
     {
-        try {
-            $movies = Movie::factory()->count(2)->sameImdbID()->create();
-        } catch (QueryException $e) {
-            $this->assertEquals(1, $movies->count());
-        }
+        $this->expectException(QueryException::class);
 
-        $this->fail("It was possible two store two movies with the same imdb_id, even if it's not allowed");
+        Movie::factory()->count(2)->sameImdbID()->create();
     }
 }
