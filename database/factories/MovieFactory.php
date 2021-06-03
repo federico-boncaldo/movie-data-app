@@ -22,6 +22,10 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
+            'title' => $this->faker->sentence(),
+            'year' => $this->faker->year(),
+            'imdb_id' => $this->faker->unique()->numerify('tt####'),
+            'type' => $this->faker->randomElement(['movie', 'game'])
         ];
     }
 
