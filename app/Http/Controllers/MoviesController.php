@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\API\MovieAPI;
 use App\Models\Movie;
+use App\Models\Poster;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +31,7 @@ class MoviesController extends Controller
                     $movie->imdb_id = $result['imdbID'];
                     $movie->type = $result['Type'];
                     $movie->save();
+                    $movie->storePoster($result);
                 } catch (QueryException $e) {
                     Log::error($e);
                 }
