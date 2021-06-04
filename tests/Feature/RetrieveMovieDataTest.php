@@ -1,14 +1,17 @@
 <?php
 
-namespace Tests\Feature;
+namespace App\tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Movie;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RetrieveMovieDataTest extends TestCase
 {
     use WithFaker;
+    use RefreshDatabase;
+
     /** @test */
     public function can_search_movie_by_title()
     {
@@ -18,5 +21,17 @@ class RetrieveMovieDataTest extends TestCase
 
         $response
             ->assertStatus(200);
+    }
+
+    /** @test */
+    public function stores_movies_when_data_are_fetched()
+    {
+        $title = 'Matrix';
+
+        $response = $this->get('/movies?title='. $title);
+
+        $response
+            ->assertStatus(200);
+        $this->assertGreaterThan(0, Movie::all()->count());
     }
 }
