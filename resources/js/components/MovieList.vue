@@ -9,9 +9,9 @@
 		<div>
 			<div v-for="movie in movies" :key="movie.id" class="card m-2">
 				<div class="card-body">
-					<p>Title: {{ movie.Title }}</p>
-					<p>Year: {{ movie.Year }}</p>
-					<p>Category:{{ movie.Type }}</p>
+					<p><b>Title</b>: {{ movie.Title }}</p>
+					<p><b>Year</b>: {{ movie.Year }}</p>
+					<p><b>Category</b>: {{ movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1) }}</p>
 				</div>
 			</div>
 		</div>
