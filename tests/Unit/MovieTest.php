@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class MovieTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
     public function cannot_be_duplicated()
@@ -18,5 +19,16 @@ class MovieTest extends TestCase
         $this->expectException(QueryException::class);
 
         Movie::factory()->count(2)->sameImdbID()->create();
+    }
+
+    public function has_a_poster()
+    {
+        $movie = Movie::factory()->create();
+        $poster = new Poster();
+        $poster->url = $this->faker->imageUrl('');
+
+        $movie->poster();
+
+        $this->assertEquals($movie->poster()->url, $poster->url);
     }
 }
