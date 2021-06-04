@@ -58,4 +58,25 @@ class RetrieveMovieDataTest extends TestCase
             ->assertStatus(200)
             ->assertJson(['Response' => true]);
     }
+
+    /** @test */
+    public function stores_posters_when_present()
+    {
+        $title = 'Matrix';
+
+        $response = $this->get('/movies?title='. urlencode($title));
+        $movies = collect($response->json()['data'])->filter(function ($movie) {
+            return ! empty($movie['Poster']) && $movie['Poster'] != 'N/A';
+        });
+        $movie = $movies->first();
+
+        $response
+            ->assertStatus(200);
+        $this->assertEquals(
+            $movie['Poster'],
+            Movie::where('imdb_id', $movie['imdbID'])
+                ->get()
+                ->poster()->url
+        );
+    }
 }
