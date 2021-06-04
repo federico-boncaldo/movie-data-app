@@ -6,8 +6,9 @@
 			<button type="button" class="btn btn-primary" @click="searchMovie('Matrix Reloaded')">Search Matrix Reloaded</button>
 			<button type="button" class="btn btn-primary" @click="searchMovie('Matrix Revolutions')">Search Matrix Revolutions</button>
 		</div>
-		<div>
+		<div class="card-columns">
 			<div v-for="movie in movies" :key="movie.id" class="card m-2">
+				<img v-if="movie.Poster && movie.Poster != 'N/A'" class="card-img img-responsive" :alt="movie.Title" :src="movie.Poster">
 				<div class="card-body">
 					<p><b>Title</b>: {{ movie.Title }}</p>
 					<p><b>Year</b>: {{ movie.Year }}</p>
