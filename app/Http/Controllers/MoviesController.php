@@ -34,7 +34,10 @@ class MoviesController extends Controller
                     Log::error($e);
                 }
             }
-            $data = Movie::all();
+            $data = [
+                'data' => Movie::all(),
+                'Response' => true,
+            ];
         } else {
             $data = [
                 'data' => 'Movie not found!',
