@@ -1,22 +1,23 @@
 <?php
 
-namespace Tests\Unit;
+namespace App\tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\API\MovieAPI;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MovieAPITest extends TestCase
 {
     /** @test */
     public function can_retrieve_movie_data()
     {
-        $movieAPI = new MovieAPI(config('services.movie_api.secret'));
+        $movieAPI = new MovieAPI(config('services.movie_api.key'));
 
-        $results = $movieAPI->getMoviesByTitle('Matrix');
+        $response = $movieAPI->getMoviesByTitle('Matrix');
 
-        $this->assertIsArray($results);
-        $this->assertNotEmpty($results);
-        $this->assertEquals(true, $results['Response']);
+        $this->assertIsArray($response->json());
+        $this->assertNotEmpty($response->json());
+        $this->assertEquals(true, $response->successful());
     }
 }
