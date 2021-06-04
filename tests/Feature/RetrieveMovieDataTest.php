@@ -17,7 +17,7 @@ class RetrieveMovieDataTest extends TestCase
     {
         $title = $this->faker->word();
 
-        $response = $this->get('/movies?title='. $title);
+        $response = $this->get('/movies?title='. urlencode($title));
 
         $response
             ->assertStatus(200);
@@ -28,10 +28,22 @@ class RetrieveMovieDataTest extends TestCase
     {
         $title = 'Matrix';
 
-        $response = $this->get('/movies?title='. $title);
+        $response = $this->get('/movies?title='. urlencode($title));
 
         $response
             ->assertStatus(200);
         $this->assertGreaterThan(0, Movie::all()->count());
+    }
+
+    /** @test */
+    public function returns_response_false_if_movie_not_found()
+    {
+        $title = 'Non existent movie';
+
+        $response = $this->get('/movies?title='. urlencode($title));
+
+        $response
+            ->assertStatus(200)
+            ->assertJson(['Response' => false]);
     }
 }
