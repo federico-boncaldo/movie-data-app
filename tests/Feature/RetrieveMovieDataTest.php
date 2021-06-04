@@ -76,6 +76,7 @@ class RetrieveMovieDataTest extends TestCase
             $movie['Poster'],
             Movie::where('imdb_id', $movie['imdbID'])
                 ->get()
+                ->first()
                 ->poster()->url
         );
     }
