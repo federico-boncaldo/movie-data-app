@@ -35,7 +35,7 @@ class MoviesController extends Controller
                 }
             }
             $data = [
-                'data' => Movie::all(),
+                'data' => $results['Search'],
                 'Response' => true,
             ];
         } else {
