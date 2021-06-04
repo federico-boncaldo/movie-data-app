@@ -46,4 +46,16 @@ class RetrieveMovieDataTest extends TestCase
             ->assertStatus(200)
             ->assertJson(['Response' => false]);
     }
+
+    /** @test */
+    public function returns_response_true_if_movie_found()
+    {
+        $title = 'Matrix';
+
+        $response = $this->get('/movies?title='. urlencode($title));
+
+        $response
+            ->assertStatus(200)
+            ->assertJson(['Response' => true]);
+    }
 }
