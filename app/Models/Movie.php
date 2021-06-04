@@ -20,4 +20,21 @@ class Movie extends Model
     {
         return $this->belongsTo(Poster::class);
     }
+
+    public function storePoster(array $result)
+    {
+        if ($result['Poster'] != 'N/A') {
+            $poster = Poster::where('url', $result['Poster'])->get();
+
+            if ($poster->isNotEmpty()) {
+                $poster = $poster->first();
+            } else {
+                $poster = new Poster();
+                $poster->url = $result['Poster'];
+                $poster->save();
+            }
+            $this->poster()->associate($poster);
+            $this->save();
+        }
+    }
 }
