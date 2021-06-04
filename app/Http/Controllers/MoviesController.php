@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\API\MovieAPI;
 use App\Models\Movie;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
@@ -19,7 +20,7 @@ class MoviesController extends Controller
         $movieAPI = new MovieAPI(config('services.movie_api.key'));
         $response = $movieAPI->getMoviesByTitle($values['title']);
 
-        if ($response->successful()) {
+        if ($response->successful() && Arr::has($response->json(), 'Search')) {
             $results = $response->json();
             foreach ($results['Search'] as $result) {
                 try {
@@ -35,7 +36,10 @@ class MoviesController extends Controller
             }
             $data = Movie::all();
         } else {
-            $data = 'Movie not found!';
+            $data = [
+                'data' => 'Movie not found!',
+                'Response' => false,
+            ];
         }
 
         return response($data, 200);
