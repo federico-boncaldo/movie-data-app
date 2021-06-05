@@ -1,9 +1,9 @@
 
-## Movie List
+# Movie List
 
 Simple application that displays and stores a list of movie when the user search for them
 
-# Learning Laravel
+## How to
 
 To run the application within docker make sure you have [docker desktop](https://www.docker.com/products/docker-desktop) installed on your machine.
 
@@ -14,8 +14,8 @@ You can build the Docker development environment via [Laravel sail](https://lara
 
 Once the environment is ready you can access the application at the [localhost](http://localhost/)
 
-# Run the tests
+## Run the tests
 
-To run the tests within Laravel sail you can use this command:
+To run the tests within Laravel Sail you can use this command:
 
 ```sail test```
